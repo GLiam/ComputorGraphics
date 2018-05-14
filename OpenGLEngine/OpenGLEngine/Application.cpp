@@ -49,13 +49,13 @@ void Application::shutdown()
 	glfwTerminate();
 }
 
-bool Application::update()
+void Application::update()
 {
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 
-	draw();
-	return true;
+
+	//return true;
 }
 
 void Application::draw()
@@ -64,7 +64,7 @@ void Application::draw()
 	mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.0f, 0.1f, 1000.0f);
 
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
-//	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	aie::Gizmos::clear();
