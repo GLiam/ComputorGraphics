@@ -1,4 +1,7 @@
 #pragma once
+#pragma warning( push )
+#pragma warning( disable : 4201)
+#pragma warning( disable : 4310)
 #include <gl_core_4_4.h>
 #include <GLFW\glfw3.h>
 #include <Gizmos.h>
@@ -6,19 +9,53 @@
 #include <glm\ext.hpp>
 #include <imgui.h>
 #include <iostream>
+#include <chrono>
+#pragma warning( pop )
 
 class Application
 {
 public:
-	Application();
-	virtual ~Application();
 
-	virtual bool Startup() = 0;
-	virtual void shutdown() = 0;
+	virtual bool OnStartup() = 0;
 	virtual void update() = 0;
-	virtual void draw() = 0;
+	virtual void render() = 0;
+	virtual void OnShutdown() = 0;
+
+	int run(std::string windowtitle, int windowWidth,
+		int windowHeight, bool Fullscreen /*, std::string configFilePath = ""*/);
+
+	bool initalise(std::string windowtitle, int windowWidth,
+		int windowHeight, bool Fullscreen /*, std::string configFilePath*/);
+
+	void gameLoop();
+
+	void Shutdown();
+
+	GLFWwindow* getWindow() const { return m_window; }
+	
+	int getWindowWidth() const { return m_windowWidth; }
+	int getWindowHeight() const { return m_windowHeight; }
+	bool getFullscreen() const { return m_Fullscreen; }
+
+	bool getRunning() const { return m_isRunning; }
+	void setRunning(bool value) { m_isRunning = value; }
+
+	float getDeltaTime() const { return m_dt; }
+	float getElapsedTime() const { return m_elapsedTime; }
 
 private:
-	GLFWwindow * window = glfwCreateWindow(1280, 720, "REEEEEEEE Window", nullptr, nullptr);
+	GLFWwindow * m_window;
+	int m_windowWidth;
+	int m_windowHeight;
+	bool m_Fullscreen;
+	bool m_isRunning;
+
+	float m_dt = 0;
+	float m_elapsedTime = 0;
+	
+	std::chrono::high_resolution_clock::time_point m_PreviousFrameTime;
+	std::chrono::high_resolution_clock::time_point m_apllicationStartTime;
+
+//	GLFWwindow * window = glfwCreateWindow(1280, 720, "REEEEEEEE Window", nullptr, nullptr);
 };
 
