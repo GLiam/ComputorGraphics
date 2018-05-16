@@ -4,13 +4,15 @@
 #pragma warning( disable : 4310)
 #include <gl_core_4_4.h>
 #include <GLFW\glfw3.h>
+#pragma warning( pop )
 #include <Gizmos.h>
 #include <glm\glm.hpp>
 #include <glm\ext.hpp>
 #include <imgui.h>
 #include <iostream>
 #include <chrono>
-#pragma warning( pop )
+#include <Shader.h>
+#include "Mesh.h"
 
 class Application
 {
@@ -43,6 +45,13 @@ public:
 	float getDeltaTime() const { return m_dt; }
 	float getElapsedTime() const { return m_elapsedTime; }
 
+protected:
+	glm::mat4			m_viewMatrix;
+	glm::mat4			m_projectionMatrix;
+	aie::ShaderProgram	m_shader;
+	Mesh				m_quadMesh;
+	glm::mat4			m_quadTransform; 
+
 private:
 	GLFWwindow * m_window;
 	int m_windowWidth;
@@ -56,6 +65,6 @@ private:
 	std::chrono::high_resolution_clock::time_point m_PreviousFrameTime;
 	std::chrono::high_resolution_clock::time_point m_apllicationStartTime;
 
-//	GLFWwindow * window = glfwCreateWindow(1280, 720, "REEEEEEEE Window", nullptr, nullptr);
+	//GLFWwindow * window = glfwCreateWindow(1280, 720, "REEEEEEEE Window", nullptr, nullptr);
 };
 
