@@ -18,7 +18,7 @@ using aie::Gizmos;
 class DemoApplication : public Application
 {
 public:
-	virtual bool OnStartup() override
+	bool OnStartup() override
 	{
 		
 		aie::Gizmos::create(10000, 10000, 10000, 10000);
@@ -41,9 +41,9 @@ public:
 		return true;
 	}
 
-	virtual void update() override
+	void update() override
 	{
-		Gizmos::clear();
+		//Gizmos::clear();
 
 		if (glfwWindowShouldClose(getWindow()))
 		{
@@ -54,14 +54,14 @@ public:
 		auto& CameraTransform = m_camera->getTransform();
 
 		auto rot = glm::angleAxis(getDeltaTime(), glm::vec3{ 0, 1, 0 });
+		//CameraTransform *= rot;
 		CameraTransform *= glm::mat4_cast(rot);
 
-
-		Gizmos::addTransform(mat4(1), 10.0f);
-		Gizmos::addAABB({ 0, 0, 0 }, { 5, 5, 5 }, { 1, 0, 0, 1 });
+		//Gizmos::addTransform(mat4(1), 10.0f);
+		//Gizmos::addAABB({ 0, 0, 0 }, { 5, 5, 5 }, { 1, 0, 0, 1 });
 	}
 
-	virtual void render() override
+	void render() override
 	{
 		mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.0f, 0.1f, 1000.0f);
 		mat4 view = glm::lookAt(glm::vec3(20, 20, 20), vec3(0), vec3(0, 1, 0));
@@ -73,14 +73,14 @@ public:
 
 		m_quadMesh.draw();
 		
-		Gizmos::draw(projection * view);
-		Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
+		//Gizmos::draw(projection * view);
+		//Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
 	}
 
-	virtual void OnShutdown() override
+	void OnShutdown() override
 	{
 		delete m_camera;
-		aie::Gizmos::destroy();
+		//aie::Gizmos::destroy();
 	}
 
 private:
@@ -92,8 +92,10 @@ int main()
 	auto App = new DemoApplication();
 
 	App->setRunning(true);
-	return App->run("REEEEEE", 1280, 720, false);
+
+	int returnVal = App->run("REEEEEE", 1280, 720, false);
+
 
 	delete App;
-	return 0;
+	return returnVal;
 }

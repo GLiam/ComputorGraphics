@@ -62,7 +62,7 @@ void Mesh::draw()
 	aie::ShaderProgram shader;
 
 	shader.loadShader(aie::eShaderStage::VERTEX,
-		"./shaders/simple.vert");
+		"./shader/simple.vert");
 
 	shader.loadShader(aie::eShaderStage::FRAGMENT,
 		"./shader/simple.frag");
