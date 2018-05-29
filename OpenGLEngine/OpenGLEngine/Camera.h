@@ -23,6 +23,7 @@ public:
 	glm::mat4 getViewMatrix() const { return glm::inverse(m_worldTransform); }
 
 	void setProjectionMatrix();
+	void setLookAt(glm::vec3 from, glm::vec3 to);
 	const glm::mat4& getProjectionMatrix() const;
 
 	virtual void update(struct GLFWwindow* window, float dt) {};

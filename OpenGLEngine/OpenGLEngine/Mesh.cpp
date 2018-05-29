@@ -14,6 +14,44 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &ibo);
 }
 
+void Mesh::initalise(unsigned int vertexCount, 
+					const Vertex * vertices, 
+					unsigned int indexCount, 
+					unsigned int * indices)
+{
+	assert(vao == 0);
+
+	glGenBuffers(1, &vbo);
+	glGenVertexArrays(1, &vao);
+
+	glBindVertexArray(vao);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	
+	glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(Vertex),
+								vertices, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE,
+							sizeof(Vertex), 0);
+	
+	if(indexCount != 0)
+	{
+		glGenBuffers(1, &ibo);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+			indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+
+		triCount = indexCount / 3;
+	}
+	else
+	{
+		triCount = vertexCount / 3;
+	}
+}
+
 void Mesh::initaliseQuad()
 {
 	assert(vao == 0);

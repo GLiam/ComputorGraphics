@@ -16,21 +16,21 @@ void FirstPersonCamera::update(GLFWwindow* window, float dt)
 
 	auto worldUp = glm::vec4{ 0, 1, 0, 0 };
 
-	//float moveSpeed = m_moveSpeed;
-	//if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-	//{
-	//	Translate(forward * deltaTime * moveSpeed);
-	//}
-	//if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	//{
-	//	Translate(forward * deltaTime * -moveSpeed);
-	//}
-	//if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-	//{
-	//	Translate(right * deltaTime * moveSpeed);
-	//}
-	//if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-	//{
-	//	Translate(right * deltaTime * -moveSpeed);
-	//}
+	float moveSpeed = m_moveSpeed;
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		Translate(forward * moveSpeed);
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		Translate(forward * -moveSpeed);
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		Translate(right * moveSpeed);
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		Translate(right  * -moveSpeed);
+	}
 }

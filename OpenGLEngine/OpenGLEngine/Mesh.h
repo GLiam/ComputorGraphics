@@ -15,6 +15,9 @@ public:
 		glm::vec2 texCoord;
 	};
 
+	void initalise(unsigned int vertexCount, const Vertex* vertices,
+		unsigned int indexCount = 0,
+		unsigned int* indices = nullptr);
 	void initaliseQuad();
 
 	virtual void draw();

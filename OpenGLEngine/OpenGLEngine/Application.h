@@ -13,6 +13,7 @@
 #include <chrono>
 #include <Shader.h>
 #include "Mesh.h"
+#include <OBJMesh.h>
 
 class Application
 {
@@ -48,14 +49,20 @@ public:
 protected:
 	glm::mat4			m_viewMatrix;
 	glm::mat4			m_projectionMatrix;
+
+	aie::OBJMesh		m_bunnyMesh;
+	glm::mat4			m_bunnyTransform;
 	aie::ShaderProgram	m_shader;
+
 	Mesh				m_quadMesh;
 	glm::mat4			m_quadTransform; 
 
 private:
 	GLFWwindow * m_window;
+	
 	int m_windowWidth;
 	int m_windowHeight;
+	
 	bool m_Fullscreen;
 	bool m_isRunning;
 
@@ -64,7 +71,4 @@ private:
 	
 	std::chrono::high_resolution_clock::time_point m_PreviousFrameTime;
 	std::chrono::high_resolution_clock::time_point m_apllicationStartTime;
-
-	//GLFWwindow * window = glfwCreateWindow(1280, 720, "REEEEEEEE Window", nullptr, nullptr);
 };
-

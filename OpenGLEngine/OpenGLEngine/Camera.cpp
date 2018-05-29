@@ -20,6 +20,11 @@ void Camera::setProjectionMatrix()
 
 }
 
+void Camera::setLookAt(glm::vec3 from, glm::vec3 to)
+{
+
+}
+
 const glm::mat4 & Camera::getProjectionMatrix() const
 {
 	assert(m_hasSetProjectionMatrix == true);
