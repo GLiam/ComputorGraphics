@@ -20,7 +20,9 @@ class DemoApplication : public Application
 public:
 	bool OnStartup() override
 	{
-		
+		glClearColor(0.25f, 0.25f, 0.25f, 1);
+
+
 		aie::Gizmos::create(10000, 10000, 10000, 10000);
 		m_camera = new Camera();
 		m_camera->setPosition({ 0, 0, 20, 1 });
@@ -45,11 +47,8 @@ public:
 			return false;
 		}
 
-		m_bunnyTransform = {
-		20, 0, 0, 0,
-		0, 20, 0, 0,
-		0, 0, 20, 0,
-		0, 0, 0, 20};
+		m_bunnyTransform = mat4(1);
+		m_bunnyTransform[3] = vec4(0, 0, 0, 1);
 
 		Mesh::Vertex vertices[4];
 		vertices[0].position = { -0.5f, 0, 0.5f, 1 };
@@ -92,24 +91,23 @@ public:
 
 	void render() override
 	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		mat4 projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.0f, 0.1f, 1000.0f);
 		mat4 view = glm::lookAt(glm::vec3(20, 20, 20), vec3(0), vec3(0, 1, 0));
 
 		m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f,
 									getWindowWidth() / (float)getWindowHeight(),
 									0.1f, 1000.0f);
-
 		m_shader.bind();
 
-		auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
-		m_shader.bindUniform("ProjectionViewModel", pvm);
-
-
-		m_bunnyMesh.draw();
-		m_quadMesh.draw();
-		
 		Gizmos::draw(m_projectionMatrix * m_viewMatrix);
 
+		//auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
+		//m_shader.bindUniform("ProjectionViewModel", pvm);
+
+		//m_quadMesh.draw();
+		
 		glm::vec4 white(1);
 		glm::vec4 black(0, 0, 0, 1);
 
@@ -124,6 +122,10 @@ public:
 				i == 10 ? white : black);
 		}
 
+		auto bvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
+		m_shader.bindUniform("ProjectionViewModel", bvm);
+
+		m_bunnyMesh.draw();
 
 		Gizmos::draw(projection * view);
 		Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
