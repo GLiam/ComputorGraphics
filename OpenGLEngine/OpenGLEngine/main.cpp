@@ -36,9 +36,19 @@ public:
 								"./shader/simple.vert");
 		m_shader.loadShader(aie::eShaderStage::FRAGMENT,
 								"./shader/simple.frag");		
+
+		m_PhongShader.loadShader(aie::eShaderStage::VERTEX,
+								"./shader/Phong.vert");
+		m_PhongShader.loadShader(aie::eShaderStage::FRAGMENT,
+								"./shader/Phong.frag");
 		if(m_shader.link() == false)
 		{
 			printf("Shader Error: %s\n", m_shader.getLastError());
+			return false;
+		}
+		if (m_PhongShader.link() == false)
+		{
+			printf("PhongShader Error: %S\n", m_PhongShader.getLastError());
 			return false;
 		}
 		if (m_bunnyMesh.load("./stanford/bunny.obj") == false)
@@ -73,10 +83,14 @@ public:
 	{
 		Gizmos::clear();
 
+
 		if (glfwWindowShouldClose(getWindow()))
 		{
 			setRunning(false);
 		}
+		float time = glfwGetTime();
+
+		m_light.direction = glm::normalize(vec3(glm::cos(time * 2), glm::sin(time * 2), 0));
 
 		auto& CameraTransform = m_camera->getTransform();
 		//m_camera->Translate(m_camera.getTransform()[2] * getDeltaTime() * 5.0f);
@@ -100,6 +114,16 @@ public:
 									getWindowWidth() / (float)getWindowHeight(),
 									0.1f, 1000.0f);
 		m_shader.bind();
+		m_PhongShader.bind();
+
+		m_PhongShader.bindUniform("LightDirection", m_light.direction);
+
+		auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
+		m_PhongShader.bindUniform("ProjectionViewModel", pvm);
+
+		m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
+
+		m_quadMesh.draw();
 
 		Gizmos::draw(m_projectionMatrix * m_viewMatrix);
 
@@ -123,7 +147,13 @@ public:
 		}
 
 		auto bvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
-		m_shader.bindUniform("ProjectionViewModel", bvm);
+		m_PhongShader.bindUniform("ProjectionViewModel", bvm);
+
+		m_PhongShader.bindUniform("NormalMatrix",
+			glm::inverseTranspose(glm::mat3(m_bunnyTransform)));
+
+		auto dvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
+		m_shader.bindUniform("ProjectionViewModel", dvm);
 
 		m_bunnyMesh.draw();
 

@@ -52,10 +52,19 @@ protected:
 
 	aie::OBJMesh		m_bunnyMesh;
 	glm::mat4			m_bunnyTransform;
+	
 	aie::ShaderProgram	m_shader;
+	aie::ShaderProgram	m_PhongShader;
 
 	Mesh				m_quadMesh;
 	glm::mat4			m_quadTransform; 
+
+	struct Light
+	{
+		glm::vec3 direction;
+	};
+
+	Light				m_light;
 
 private:
 	GLFWwindow * m_window;
