@@ -39,105 +39,11 @@ c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\
   c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\quaternion.hpp(130): note: see reference to class template instantiation 'glm::tquat<T,P>' being compiled
 c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\camera.h(29): warning C4100: 'dt': unreferenced formal parameter
 c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\camera.h(29): warning C4100: 'window': unreferenced formal parameter
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(51): warning C4477: 'printf' : format string '%S' requires an argument of type 'wchar_t *', but variadic argument 1 has type 'const char *'
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(51): note: consider using '%hS' in the format string
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(51): note: consider using '%TS' in the format string
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(91): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Shader.cpp
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(205): note: see reference to class template instantiation 'glm::vec<2,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(226): note: see reference to class template instantiation 'glm::vec<3,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(271): note: see reference to class template instantiation 'glm::vec<4,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-  Generating Code...
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-  Compiling...
-  Application.cpp
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(205): note: see reference to class template instantiation 'glm::vec<2,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(226): note: see reference to class template instantiation 'glm::vec<3,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(271): note: see reference to class template instantiation 'glm::vec<4,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(88): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(89): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(90): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(92): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(93): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(94): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(96): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(97): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(98): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(100): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(101): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(102): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(175): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(176): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(177): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(178): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(180): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(181): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(182): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(183): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(185): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(186): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(187): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(188): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\quaternion.hpp(55): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\quaternion.hpp(130): note: see reference to class template instantiation 'glm::tquat<T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\application.cpp(51): warning C4305: 'return': truncation from 'int' to 'bool'
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\application.cpp(43): warning C4189: 'monitor': local variable is initialized but not referenced
-  Mesh.cpp
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(205): note: see reference to class template instantiation 'glm::vec<2,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec2.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(226): note: see reference to class template instantiation 'glm::vec<3,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec3.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(45): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(271): note: see reference to class template instantiation 'glm::vec<4,T,P>' being compiled
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(46): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\detail\type_vec4.hpp(47): warning C4201: nonstandard extension used: nameless struct/union
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(88): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(89): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(90): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(92): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(93): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(94): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(96): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(97): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(98): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(100): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(101): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(102): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(175): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(176): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(177): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(178): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(180): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(181): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(182): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(183): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(185): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(186): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(187): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\bitfield.inl(188): warning C4310: cast truncates constant value
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\quaternion.hpp(55): warning C4201: nonstandard extension used: nameless struct/union
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\quaternion.hpp(130): note: see reference to class template instantiation 'glm::tquat<T,P>' being compiled
-  Generating Code...
+c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(69): warning C4477: 'printf' : format string '%S' requires an argument of type 'wchar_t *', but variadic argument 1 has type 'const char *'
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(69): note: consider using '%hS' in the format string
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(69): note: consider using '%TS' in the format string
+c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(74): warning C4477: 'printf' : format string '%S' requires an argument of type 'wchar_t *', but variadic argument 1 has type 'const char *'
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(74): note: consider using '%hS' in the format string
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(74): note: consider using '%TS' in the format string
+c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(126): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   OpenGLEngine.vcxproj -> C:\Users\s162871\Desktop\ComputorGraphics\OpenGLEngine\x64\Debug\OpenGLEngine.exe

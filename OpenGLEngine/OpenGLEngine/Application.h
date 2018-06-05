@@ -53,6 +53,8 @@ protected:
 	aie::OBJMesh		m_bunnyMesh;
 	glm::mat4			m_bunnyTransform;
 	
+	aie::Texture		m_gridTexture;
+	aie::ShaderProgram	m_TexturedShader;
 	aie::ShaderProgram	m_shader;
 	aie::ShaderProgram	m_PhongShader;
 
@@ -62,9 +64,12 @@ protected:
 	struct Light
 	{
 		glm::vec3 direction;
+		glm::vec3 diffuse;
+		glm::vec3 specular;
 	};
 
 	Light				m_light;
+	glm::vec3			m_ambientLight;
 
 private:
 	GLFWwindow * m_window;

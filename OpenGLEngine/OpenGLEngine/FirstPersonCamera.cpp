@@ -19,18 +19,18 @@ void FirstPersonCamera::update(GLFWwindow* window, float dt)
 	float moveSpeed = m_moveSpeed;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		Translate(forward * moveSpeed);
+		Translate(forward * m_moveSpeed);
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		Translate(forward * -moveSpeed);
+		Translate(forward * -m_moveSpeed);
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		Translate(right * moveSpeed);
+		Translate(right * m_moveSpeed);
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		Translate(right  * -moveSpeed);
+		Translate(right  * -m_moveSpeed);
 	}
 }

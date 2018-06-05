@@ -18,6 +18,7 @@ using aie::Gizmos;
 class DemoApplication : public Application
 {
 public:
+
 	bool OnStartup() override
 	{
 		glClearColor(0.25f, 0.25f, 0.25f, 1);
@@ -32,6 +33,18 @@ public:
 							getWindowWidth() / (float)getWindowHeight(),
 							0.1f, 1000.0f);
 
+		aie::Texture texture1;
+		texture1.load("numbered_gride.tga");
+
+		aie::Texture texture2;
+		unsigned char texelData[4] = { 0, 255, 255, 0 };
+		texture2.create(2, 2, aie::Texture::RED, texelData);
+
+		m_light.diffuse =	{ 1, 1, 0 };
+		m_light.specular =	{ 1, 1, 0 };
+		m_ambientLight =	{ 0.25f, 0.25f, 0.25f };
+
+
 		m_shader.loadShader(aie::eShaderStage::VERTEX,
 								"./shader/simple.vert");
 		m_shader.loadShader(aie::eShaderStage::FRAGMENT,
@@ -41,6 +54,11 @@ public:
 								"./shader/Phong.vert");
 		m_PhongShader.loadShader(aie::eShaderStage::FRAGMENT,
 								"./shader/Phong.frag");
+
+		m_TexturedShader.loadShader(aie::eShaderStage::VERTEX,
+								"./shader/texture.vert");
+		m_TexturedShader.loadShader(aie::eShaderStage::FRAGMENT,
+								"./shader/texture.frag");
 		if(m_shader.link() == false)
 		{
 			printf("Shader Error: %s\n", m_shader.getLastError());
@@ -51,14 +69,30 @@ public:
 			printf("PhongShader Error: %S\n", m_PhongShader.getLastError());
 			return false;
 		}
+		if (m_TexturedShader.link() == false)
+		{
+			printf("TexturedShader Error: %S\n", m_TexturedShader.getLastError());
+			return false;
+		}
 		if (m_bunnyMesh.load("./stanford/bunny.obj") == false)
 		{
 			printf("Bunny Mesh Error!\n");
 			return false;
 		}
+		if (m_gridTexture.load("./Textures/numbered_grid.tga") == false)
+		{
+			printf("Failed to load texture!\n");
+			return false;
+		}
 
-		m_bunnyTransform = mat4(1);
-		m_bunnyTransform[3] = vec4(0, 0, 0, 1);
+
+		//m_bunnyTransform = mat4(1);
+		//m_bunnyTransform[3] = vec4(1, 0, 0, 1);
+
+		m_bunnyTransform = { 0.5f, 0, 0, 0,
+							 0, 0.5f, 0, 0,
+							 0, 0, 0.5f, 0,
+							 0, 0, 0, 1 };
 
 		Mesh::Vertex vertices[4];
 		vertices[0].position = { -0.5f, 0, 0.5f, 1 };
@@ -88,6 +122,7 @@ public:
 		{
 			setRunning(false);
 		}
+		
 		float time = glfwGetTime();
 
 		m_light.direction = glm::normalize(vec3(glm::cos(time * 2), glm::sin(time * 2), 0));
@@ -115,22 +150,42 @@ public:
 									0.1f, 1000.0f);
 		m_shader.bind();
 		m_PhongShader.bind();
+		m_TexturedShader.bind();
 
-		m_PhongShader.bindUniform("LightDirection", m_light.direction);
+		//ambient light colour
+		//m_PhongShader.bindUniform("Ia", m_ambientLight);
+		//diffuse light colour
+		//m_PhongShader.bindUniform("Id", m_ambientLight);
+		//specular light colour
+		//m_PhongShader.bindUniform("Is", m_ambientLight);
+		//m_PhongShader.bindUniform("LightDirection", m_light.direction);
 
-		auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
-		m_PhongShader.bindUniform("ProjectionViewModel", pvm);
+		//auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
+		//m_PhongShader.bindUniform("ProjectionViewModel", pvm);
 
-		m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
+		//m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
 
-		m_quadMesh.draw();
+		//m_quadMesh.draw();
 
 		Gizmos::draw(m_projectionMatrix * m_viewMatrix);
 
-		//auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
-		//m_shader.bindUniform("ProjectionViewModel", pvm);
+		auto ovm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
+		m_shader.bindUniform("ProjectionViewModel", ovm);
+		
+		m_TexturedShader.bindUniform("diffuseTexture", 0);
 
-		//m_quadMesh.draw();
+		m_gridTexture.bind(0);
+		m_quadMesh.draw();
+
+		//auto bvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
+		//m_PhongShader.bindUniform("ProjectionViewModel", bvm);
+
+		//m_PhongShader.bindUniform("NormalMatrix",
+		//	glm::inverseTranspose(glm::mat3(m_bunnyTransform)));
+
+		//auto dvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
+		//m_shader.bindUniform("ProjectionViewModel", dvm);
+		
 		
 		glm::vec4 white(1);
 		glm::vec4 black(0, 0, 0, 1);
@@ -146,17 +201,8 @@ public:
 				i == 10 ? white : black);
 		}
 
-		auto bvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
-		m_PhongShader.bindUniform("ProjectionViewModel", bvm);
-
-		m_PhongShader.bindUniform("NormalMatrix",
-			glm::inverseTranspose(glm::mat3(m_bunnyTransform)));
-
-		auto dvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
-		m_shader.bindUniform("ProjectionViewModel", dvm);
-
-		m_bunnyMesh.draw();
-
+		//m_bunnyMesh.draw();
+		
 		Gizmos::draw(projection * view);
 		Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
 	}
@@ -177,7 +223,7 @@ int main()
 
 	App->setRunning(true);
 
-	int returnVal = App->run("REEEEEE", 1280, 720, false);
+	int returnVal = App->run("Graphics Engine", 1280, 720, false);
 
 
 	delete App;

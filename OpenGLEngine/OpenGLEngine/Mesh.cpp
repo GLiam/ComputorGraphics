@@ -70,6 +70,25 @@ void Mesh::initaliseQuad()
 	vertices[3].position = { -0.5f, 0, 0.5f, 1 };
 	vertices[4].position = { -0.5f, 0, 0.5f, 1 };
 	vertices[5].position = { -0.5f, 0, 0.5f, 1 };
+	
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(Vertex),
+		vertices, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE,
+		sizeof(Vertex), 0);
+	
+	vertices[0].texCoord = { 0, 1 };
+	vertices[1].texCoord = { 1, 1 };
+	vertices[2].texCoord = { 0, 1 };
+	
+	vertices[3].texCoord = { 0, 0 };
+	vertices[4].texCoord = { 1, 1 };
+	vertices[5].texCoord = { 1, 0 };
+
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+						sizeof(Vertex), (void*)32);
 
 	vertices[0].normal = { 0, 1, 0, 0 };
 	vertices[1].normal = { 0, 1, 0, 0 };
@@ -81,15 +100,6 @@ void Mesh::initaliseQuad()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_TRUE,
 							sizeof(Vertex), (void*)16);
-
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(Vertex),
-		vertices, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE,
-		sizeof(Vertex), 0);
-
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -111,7 +121,6 @@ void Mesh::draw()
 
 	shader.loadShader(aie::eShaderStage::VERTEX,
 							"./shader/simple.vert");
-
 	shader.loadShader(aie::eShaderStage::FRAGMENT,
 							"./shader/simple.frag");
 
@@ -119,6 +128,12 @@ void Mesh::draw()
 							"./shader/Phong.vert");
 	shader.loadShader(aie::eShaderStage::FRAGMENT,
 							"./shader/Phong.frag");
+
+	shader.loadShader(aie::eShaderStage::VERTEX,
+							"./shader/texture.vert");
+	shader.loadShader(aie::eShaderStage::FRAGMENT,
+							"./shader/texture.frag");
+
 	if(shader.link() == false)
 	{
 		printf("Shader Error: %s\n", shader.getLastError());
