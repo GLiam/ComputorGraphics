@@ -63,13 +63,34 @@ void Mesh::initaliseQuad()
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
+
+	//positions
 	Vertex vertices[6];
 	vertices[0].position = { -0.5f, 0, 0.5f, 1 };
-	vertices[1].position = { -0.5f, 0, 0.5f, 1 };
-	vertices[2].position = { -0.5f, 0, 0.5f, 1 };
-	vertices[3].position = { -0.5f, 0, 0.5f, 1 };
-	vertices[4].position = { -0.5f, 0, 0.5f, 1 };
-	vertices[5].position = { -0.5f, 0, 0.5f, 1 };
+	vertices[1].position = { 0.5f, 0, 0.5f, 1 };
+	vertices[2].position = { -0.5f, 0, -0.5f, 1 };
+
+	vertices[3].position = { -0.5f, 0, -0.5f, 1 };
+	vertices[4].position = { 0.5f, 0, 0.5f, 1 };
+	vertices[5].position = { 0.5f, 0, -0.5f, 1 };
+
+	//texCoords
+	vertices[0].texCoord = { 0, 1 };
+	vertices[1].texCoord = { 1, 1 };
+	vertices[2].texCoord = { 0, 0 };
+
+	vertices[3].texCoord = { 0, 0 };
+	vertices[4].texCoord = { 1, 1 };
+	vertices[5].texCoord = { 1, 0 };
+
+	//normals
+	vertices[0].normal = { 0, 1, 0, 0 };
+	vertices[1].normal = { 0, 1, 0, 0 };
+	vertices[2].normal = { 0, 1, 0, 0 };
+
+	vertices[3].normal = { 0, 1, 0, 0 };
+	vertices[4].normal = { 0, 1, 0, 0 };
+	vertices[5].normal = { 0, 1, 0, 0 };
 	
 	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(Vertex),
 		vertices, GL_STATIC_DRAW);
@@ -78,24 +99,11 @@ void Mesh::initaliseQuad()
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE,
 		sizeof(Vertex), 0);
 	
-	vertices[0].texCoord = { 0, 1 };
-	vertices[1].texCoord = { 1, 1 };
-	vertices[2].texCoord = { 0, 1 };
-	
-	vertices[3].texCoord = { 0, 0 };
-	vertices[4].texCoord = { 1, 1 };
-	vertices[5].texCoord = { 1, 0 };
 
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
 						sizeof(Vertex), (void*)32);
 
-	vertices[0].normal = { 0, 1, 0, 0 };
-	vertices[1].normal = { 0, 1, 0, 0 };
-	vertices[2].normal = { 0, 1, 0, 0 };
-	vertices[3].normal = { 0, 1, 0, 0 };
-	vertices[4].normal = { 0, 1, 0, 0 };
-	vertices[5].normal = { 0, 1, 0, 0 };
 
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_TRUE,
@@ -116,26 +124,4 @@ void Mesh::draw()
 			GL_UNSIGNED_INT, 0);
 	else
 		glDrawArrays(GL_TRIANGLES, 0, 3 * triCount);
-
-	aie::ShaderProgram shader;
-
-	shader.loadShader(aie::eShaderStage::VERTEX,
-							"./shader/simple.vert");
-	shader.loadShader(aie::eShaderStage::FRAGMENT,
-							"./shader/simple.frag");
-
-	shader.loadShader(aie::eShaderStage::VERTEX,
-							"./shader/Phong.vert");
-	shader.loadShader(aie::eShaderStage::FRAGMENT,
-							"./shader/Phong.frag");
-
-	shader.loadShader(aie::eShaderStage::VERTEX,
-							"./shader/texture.vert");
-	shader.loadShader(aie::eShaderStage::FRAGMENT,
-							"./shader/texture.frag");
-
-	if(shader.link() == false)
-	{
-		printf("Shader Error: %s\n", shader.getLastError());
-	}
 }

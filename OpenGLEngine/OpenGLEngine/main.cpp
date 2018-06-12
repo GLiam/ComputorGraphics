@@ -59,6 +59,12 @@ public:
 								"./shader/texture.vert");
 		m_TexturedShader.loadShader(aie::eShaderStage::FRAGMENT,
 								"./shader/texture.frag");
+		
+		m_TexturedShader.loadShader(aie::eShaderStage::VERTEX,
+								"./shader/texture.vert");
+		m_TexturedShader.loadShader(aie::eShaderStage::FRAGMENT,
+								"./shader/texture.frag");
+
 		if(m_shader.link() == false)
 		{
 			printf("Shader Error: %s\n", m_shader.getLastError());
@@ -79,7 +85,7 @@ public:
 			printf("Bunny Mesh Error!\n");
 			return false;
 		}
-		if (m_gridTexture.load("./Textures/numbered_grid.tga") == false)
+		if (m_gridTexture.load("./shader/numbered_grid.tga") == false)
 		{
 			printf("Failed to load texture!\n");
 			return false;
@@ -94,20 +100,24 @@ public:
 							 0, 0, 0.5f, 0,
 							 0, 0, 0, 1 };
 
-		Mesh::Vertex vertices[4];
-		vertices[0].position = { -0.5f, 0, 0.5f, 1 };
-		vertices[1].position = { 0.5f, 0, 0.5f, 1 };
-		vertices[2].position = { -0.5f, 0, -0.5f, 1 };
-		vertices[3].position = { 0.5f, 0, -0.5f, 1 };
+		//Mesh::Vertex vertices[4];
+		//vertices[0].position = { -0.5f, 0, 0.5f, 1 };
+		//vertices[0].texCoord = { 0.0f, 0.0f };
+		//vertices[1].position = { 0.5f, 0, 0.5f, 1 };
+		//vertices[1].texCoord = { 1.0f, 0.0f };
+		//vertices[2].position = { -0.5f, 0, -0.5f, 1 };
+		//vertices[2].texCoord = { 1.0f, 1.0f };
+		//vertices[3].position = { 0.5f, 0, -0.5f, 1 };
+		//vertices[3].texCoord = { 0.0f, 1.0f };
 
-		unsigned int indices[6] = { 0, 1, 2, 2, 1, 3 };
+		//unsigned int indices[6] = { 0, 1, 2, 2, 1, 3 };
 
-		m_quadMesh.initalise(4, vertices, 6, indices);
-		//m_quadMesh.initaliseQuad();
+		//m_quadMesh.initalise(4, vertices, 6, indices);
+		m_quadMesh.initaliseQuad();
 
-		m_quadTransform = { 10, 0, 0, 0,
-							0, 10, 0, 0,
-							0, 0, 10, 0,
+		m_quadTransform = { 15, 0, 0, 0,
+							0, 15, 0, 0,
+							0, 0, 15, 0,
 							0, 0, 0, 1 };
 
 		return true;
@@ -148,8 +158,8 @@ public:
 		m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f,
 									getWindowWidth() / (float)getWindowHeight(),
 									0.1f, 1000.0f);
-		m_shader.bind();
-		m_PhongShader.bind();
+		//m_shader.bind();
+		//m_PhongShader.bind();
 		m_TexturedShader.bind();
 
 		//ambient light colour
@@ -160,18 +170,17 @@ public:
 		//m_PhongShader.bindUniform("Is", m_ambientLight);
 		//m_PhongShader.bindUniform("LightDirection", m_light.direction);
 
-		//auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
+		auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
 		//m_PhongShader.bindUniform("ProjectionViewModel", pvm);
 
 		//m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
 
-		//m_quadMesh.draw();
+		//Gizmos::draw(m_projectionMatrix * m_viewMatrix);
 
-		Gizmos::draw(m_projectionMatrix * m_viewMatrix);
-
-		auto ovm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
-		m_shader.bindUniform("ProjectionViewModel", ovm);
+		//auto ovm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
+		//m_shader.bindUniform("ProjectionViewModel", ovm);
 		
+		m_TexturedShader.bindUniform("ProjectionViewModel", pvm);
 		m_TexturedShader.bindUniform("diffuseTexture", 0);
 
 		m_gridTexture.bind(0);
@@ -187,19 +196,19 @@ public:
 		//m_shader.bindUniform("ProjectionViewModel", dvm);
 		
 		
-		glm::vec4 white(1);
-		glm::vec4 black(0, 0, 0, 1);
+		//glm::vec4 white(1);
+		//glm::vec4 black(0, 0, 0, 1);
 
-		for (int i = 0; i < 21; i++)
-		{
-			aie::Gizmos::addLine(glm::vec3(-10 + i, 0, 10),
-				glm::vec3(-10 + i, 0, -10),
-				i == 10 ? white : black);
+		//for (int i = 0; i < 21; i++)
+		//{
+		//	aie::Gizmos::addLine(glm::vec3(-10 + i, 0, 10),
+		//		glm::vec3(-10 + i, 0, -10),
+		//		i == 10 ? white : black);
 
-			aie::Gizmos::addLine(glm::vec3(10, 0, -10 + i),
-				glm::vec3(-10, 0, -10 + i),
-				i == 10 ? white : black);
-		}
+		//	aie::Gizmos::addLine(glm::vec3(10, 0, -10 + i),
+		//		glm::vec3(-10, 0, -10 + i),
+		//		i == 10 ? white : black);
+		//}
 
 		//m_bunnyMesh.draw();
 		
