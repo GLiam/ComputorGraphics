@@ -26,15 +26,17 @@ public:
 
 		aie::Gizmos::create(10000, 10000, 10000, 10000);
 		m_camera = new Camera();
-		m_camera->setPosition({ 0, 0, 20, 1 });
+		m_camera->setPosition({ 0, 0, 50, 1 });
 
-		m_viewMatrix = glm::lookAt(vec3(10), vec3(0), vec3(0, 1, 0));
+		m_viewMatrix = glm::lookAt(vec3(20), vec3(0), vec3(0, 1, 0));
 		m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f,
 							getWindowWidth() / (float)getWindowHeight(),
 							0.1f, 1000.0f);
 
+		//aie::Texture texture2;
+		//texture1.load("numbered_gride.tga");
 		aie::Texture texture1;
-		texture1.load("numbered_gride.tga");
+		texture1.load("soulspear_diffuse.tga");
 
 		aie::Texture texture2;
 		unsigned char texelData[4] = { 0, 255, 255, 0 };
@@ -90,6 +92,16 @@ public:
 			printf("Failed to load texture!\n");
 			return false;
 		}
+		if(m_spearMesh.load("./stanford/soulspear.obj", true, true) == false)
+		{
+			printf("Soulspear Mesh Error!\n");
+			return false;
+		}
+
+		m_spearTransform = { 1, 0, 0, 0,
+							 0, 1, 0, 0,
+							 0, 0, 1, 0,
+							 0, 0, 0, 1 };
 
 
 		//m_bunnyTransform = mat4(1);
@@ -115,9 +127,9 @@ public:
 		//m_quadMesh.initalise(4, vertices, 6, indices);
 		m_quadMesh.initaliseQuad();
 
-		m_quadTransform = { 15, 0, 0, 0,
-							0, 15, 0, 0,
-							0, 0, 15, 0,
+		m_quadTransform = { 10, 0, 0, 0,
+							0, 10, 0, 0,
+							0, 0, 10, 0,
 							0, 0, 0, 1 };
 
 		return true;
@@ -158,61 +170,56 @@ public:
 		m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f,
 									getWindowWidth() / (float)getWindowHeight(),
 									0.1f, 1000.0f);
+		
+		glm::vec4 white(1);
+		glm::vec4 black(0, 0, 0, 1);
+
+		for (int i = 0; i < 21; i++)
+		{
+			aie::Gizmos::addLine(glm::vec3(-10 + i, 0, 10),
+				glm::vec3(-10 + i, 0, -10),
+				i == 10 ? white : black);
+
+			aie::Gizmos::addLine(glm::vec3(10, 0, -10 + i),
+				glm::vec3(-10, 0, -10 + i),
+				i == 10 ? white : black);
+		}
+
+		auto pvmSpear = m_projectionMatrix * m_viewMatrix * m_spearTransform;
+		//auto pvmGrid = m_projectionMatrix * m_viewMatrix * m_spearTransform;
+		//auto pvmQuad = m_projectionMatrix * m_viewMatrix * m_quadTransform;
+		//auto pvmBunny = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
+		
+		//m_gridTexture.bind(0);
+
 		//m_shader.bind();
 		//m_PhongShader.bind();
 		m_TexturedShader.bind();
+			
+		m_TexturedShader.bindUniform("ProjectionViewModel", pvmSpear);
+		//m_TexturedShader.bindUniform("diffuseTexture", 0);
+		//m_shader.bindUniform("ProjectionViewModel", ovm);
 
-		//ambient light colour
+		
+		////ambient light colour
 		//m_PhongShader.bindUniform("Ia", m_ambientLight);
-		//diffuse light colour
+		////diffuse light colour
 		//m_PhongShader.bindUniform("Id", m_ambientLight);
-		//specular light colour
+		////specular light colour
 		//m_PhongShader.bindUniform("Is", m_ambientLight);
 		//m_PhongShader.bindUniform("LightDirection", m_light.direction);
-
-		auto pvm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
-		//m_PhongShader.bindUniform("ProjectionViewModel", pvm);
-
+		//m_PhongShader.bindUniform("ProjectionViewModel", pvmSpear);
 		//m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
 
-		//Gizmos::draw(m_projectionMatrix * m_viewMatrix);
+		//m_PhongShader.bindUniform("ProjectionViewModel", pvmSpear);
+		//m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_spearTransform)));
 
-		//auto ovm = m_projectionMatrix * m_viewMatrix * m_quadTransform;
-		//m_shader.bindUniform("ProjectionViewModel", ovm);
-		
-		m_TexturedShader.bindUniform("ProjectionViewModel", pvm);
-		m_TexturedShader.bindUniform("diffuseTexture", 0);
-
-		m_gridTexture.bind(0);
-		m_quadMesh.draw();
-
-		//auto bvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
-		//m_PhongShader.bindUniform("ProjectionViewModel", bvm);
-
-		//m_PhongShader.bindUniform("NormalMatrix",
-		//	glm::inverseTranspose(glm::mat3(m_bunnyTransform)));
-
-		//auto dvm = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
-		//m_shader.bindUniform("ProjectionViewModel", dvm);
-		
-		
-		//glm::vec4 white(1);
-		//glm::vec4 black(0, 0, 0, 1);
-
-		//for (int i = 0; i < 21; i++)
-		//{
-		//	aie::Gizmos::addLine(glm::vec3(-10 + i, 0, 10),
-		//		glm::vec3(-10 + i, 0, -10),
-		//		i == 10 ? white : black);
-
-		//	aie::Gizmos::addLine(glm::vec3(10, 0, -10 + i),
-		//		glm::vec3(-10, 0, -10 + i),
-		//		i == 10 ? white : black);
-		//}
-
+		//m_quadMesh.draw();
 		//m_bunnyMesh.draw();
+		m_spearMesh.draw();
 		
-		Gizmos::draw(projection * view);
+		//Gizmos::draw(projection * view);
+		Gizmos::draw(m_projectionMatrix * m_viewMatrix);
 		Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
 	}
 

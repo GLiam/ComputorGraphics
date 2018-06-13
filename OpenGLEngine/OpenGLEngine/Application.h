@@ -53,13 +53,18 @@ protected:
 	aie::OBJMesh		m_bunnyMesh;
 	glm::mat4			m_bunnyTransform;
 	
+	aie::OBJMesh		m_spearMesh;
+	glm::mat4			m_spearTransform;
+
 	aie::Texture		m_gridTexture;
 	aie::ShaderProgram	m_TexturedShader;
 	aie::ShaderProgram	m_shader;
 	aie::ShaderProgram	m_PhongShader;
+	aie::ShaderProgram	m_SpearShader;
 
 	Mesh				m_quadMesh;
 	glm::mat4			m_quadTransform; 
+
 
 	struct Light
 	{
