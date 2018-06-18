@@ -23,6 +23,7 @@ public:
 	{
 		glClearColor(0.25f, 0.25f, 0.25f, 1);
 
+		glEnable(GL_DEPTH_TEST);
 
 		aie::Gizmos::create(10000, 10000, 10000, 10000);
 		m_camera = new Camera();
@@ -41,11 +42,6 @@ public:
 		aie::Texture texture2;
 		unsigned char texelData[4] = { 0, 255, 255, 0 };
 		texture2.create(2, 2, aie::Texture::RED, texelData);
-
-		m_light.diffuse =	{ 1, 1, 0 };
-		m_light.specular =	{ 1, 1, 0 };
-		m_ambientLight =	{ 0.25f, 0.25f, 0.25f };
-
 
 		m_shader.loadShader(aie::eShaderStage::VERTEX,
 								"./shader/simple.vert");
@@ -87,6 +83,11 @@ public:
 			printf("Bunny Mesh Error!\n");
 			return false;
 		}
+		if (m_DragonMesh.load("./stanford/Dragon.obj") == false)
+		{
+			printf("Dragon Mesh Error!\n");
+			return false;
+		}
 		if (m_gridTexture.load("./shader/numbered_grid.tga") == false)
 		{
 			printf("Failed to load texture!\n");
@@ -101,7 +102,7 @@ public:
 		m_spearTransform = { 1, 0, 0, 0,
 							 0, 1, 0, 0,
 							 0, 0, 1, 0,
-							 0, 0, 0, 1 };
+							 6, 0, -6, 1 };
 
 
 		//m_bunnyTransform = mat4(1);
@@ -110,7 +111,12 @@ public:
 		m_bunnyTransform = { 0.5f, 0, 0, 0,
 							 0, 0.5f, 0, 0,
 							 0, 0, 0.5f, 0,
-							 0, 0, 0, 1 };
+							 6, 0, 0, 1 };
+
+		m_DragonTransform = { 0.5f, 0, 0, 0,
+							  0, 0.5f, 0, 0,
+							  0, 0, 0.5f, 0,
+							  -6, 0, 0, 1 };
 
 		//Mesh::Vertex vertices[4];
 		//vertices[0].position = { -0.5f, 0, 0.5f, 1 };
@@ -131,6 +137,11 @@ public:
 							0, 10, 0, 0,
 							0, 0, 10, 0,
 							0, 0, 0, 1 };
+
+		m_light.diffuse = { 1, 0, 0 };
+		m_light.specular = { 1, 1, 0 };
+		m_ambientLight = { 0.25f, 0.25f, 0.25f };
+
 
 		return true;
 	}
@@ -156,7 +167,7 @@ public:
 		//CameraTransform *= rot;
 		CameraTransform *= glm::mat4_cast(rot);
 
-		Gizmos::addTransform(mat4(1), 10.0f);
+		//Gizmos::addTransform(mat4(1), 10.0f);
 		//Gizmos::addAABB({ 0, 0, 0 }, { 5, 5, 5 }, { 1, 0, 0, 1 });
 	}
 
@@ -186,41 +197,51 @@ public:
 		}
 
 		auto pvmSpear = m_projectionMatrix * m_viewMatrix * m_spearTransform;
+		auto pvmBunny = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
+		auto pvmDragon = m_projectionMatrix * m_viewMatrix * m_DragonTransform;
 		//auto pvmGrid = m_projectionMatrix * m_viewMatrix * m_spearTransform;
 		//auto pvmQuad = m_projectionMatrix * m_viewMatrix * m_quadTransform;
-		//auto pvmBunny = m_projectionMatrix * m_viewMatrix * m_bunnyTransform;
 		
+		m_TexturedShader.bind();
+		m_TexturedShader.bindUniform("ProjectionViewModel", pvmSpear);
+		m_TexturedShader.bindUniform("diffuseTexture", 0);		
+		
+		m_spearMesh.draw();
+		
+		//m_spearMesh.draw();
 		//m_gridTexture.bind(0);
 
 		//m_shader.bind();
-		//m_PhongShader.bind();
-		m_TexturedShader.bind();
+		m_PhongShader.bind();
 			
-		m_TexturedShader.bindUniform("ProjectionViewModel", pvmSpear);
-		//m_TexturedShader.bindUniform("diffuseTexture", 0);
 		//m_shader.bindUniform("ProjectionViewModel", ovm);
 
-		
-		////ambient light colour
-		//m_PhongShader.bindUniform("Ia", m_ambientLight);
-		////diffuse light colour
-		//m_PhongShader.bindUniform("Id", m_ambientLight);
-		////specular light colour
-		//m_PhongShader.bindUniform("Is", m_ambientLight);
-		//m_PhongShader.bindUniform("LightDirection", m_light.direction);
-		//m_PhongShader.bindUniform("ProjectionViewModel", pvmSpear);
-		//m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
+		m_PhongShader.bindUniform("cameraPosition", vec3(glm::inverse(view)[3]));
 
-		//m_PhongShader.bindUniform("ProjectionViewModel", pvmSpear);
-		//m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_spearTransform)));
+		m_PhongShader.bindUniform("ProjectionViewModel", pvmBunny);
+		m_PhongShader.bindUniform("ProjectionViewModel", pvmDragon);
+		//ambient light colour
+		m_PhongShader.bindUniform("Ia", m_ambientLight);
+		//diffuse light colour
+		m_PhongShader.bindUniform("Id", m_light.diffuse);
+		//specular light colour
+		m_PhongShader.bindUniform("Is", m_light.specular);
+
+		m_PhongShader.bindUniform("LightDirection", m_light.direction);
+		
+		m_PhongShader.bindUniform("ProjectionViewModel", pvmBunny);
+		m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_bunnyTransform)));		
+		m_bunnyMesh.draw();
+
+		m_PhongShader.bindUniform("ProjectionViewModel", pvmDragon);
+		m_PhongShader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_DragonTransform)));
+		m_DragonMesh.draw();
 
 		//m_quadMesh.draw();
-		//m_bunnyMesh.draw();
-		m_spearMesh.draw();
-		
+
 		//Gizmos::draw(projection * view);
+		//Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
 		Gizmos::draw(m_projectionMatrix * m_viewMatrix);
-		Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
 	}
 
 	void OnShutdown() override

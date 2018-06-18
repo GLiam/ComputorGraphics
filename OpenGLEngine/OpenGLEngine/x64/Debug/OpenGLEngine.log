@@ -39,11 +39,11 @@ c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\
   c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\dependances\glm\glm\gtc\quaternion.hpp(130): note: see reference to class template instantiation 'glm::tquat<T,P>' being compiled
 c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\camera.h(29): warning C4100: 'dt': unreferenced formal parameter
 c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\camera.h(29): warning C4100: 'window': unreferenced formal parameter
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(77): warning C4477: 'printf' : format string '%S' requires an argument of type 'wchar_t *', but variadic argument 1 has type 'const char *'
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(77): note: consider using '%hS' in the format string
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(77): note: consider using '%TS' in the format string
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(82): warning C4477: 'printf' : format string '%S' requires an argument of type 'wchar_t *', but variadic argument 1 has type 'const char *'
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(82): note: consider using '%hS' in the format string
-  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(82): note: consider using '%TS' in the format string
-c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(148): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(73): warning C4477: 'printf' : format string '%S' requires an argument of type 'wchar_t *', but variadic argument 1 has type 'const char *'
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(73): note: consider using '%hS' in the format string
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(73): note: consider using '%TS' in the format string
+c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(78): warning C4477: 'printf' : format string '%S' requires an argument of type 'wchar_t *', but variadic argument 1 has type 'const char *'
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(78): note: consider using '%hS' in the format string
+  c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(78): note: consider using '%TS' in the format string
+c:\users\s162871\desktop\computorgraphics\openglengine\openglengine\main.cpp(159): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   OpenGLEngine.vcxproj -> C:\Users\s162871\Desktop\ComputorGraphics\OpenGLEngine\x64\Debug\OpenGLEngine.exe

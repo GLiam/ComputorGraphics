@@ -1,6 +1,12 @@
 #version 410
 
+in vec4 vPosition;
 in vec3 vNormal;
+
+uniform vec3 Ka;
+uniform vec3 Kd;
+uniform vec3 Ks;
+uniform float specularPower;
 
 uniform vec3 Ia;
 
@@ -17,7 +23,14 @@ void main()
 	
 	float lambertTerm = max(0, min(1, dot(N, -L)));
 	
-	vec3 diffuse = Id * lambertTerm;
+	vec3 V = normalize(cameraPosition - vPosition.xyz);
+	vec3 R = reflect( L, N);
+	
+	float specularTerm = pow( max( 0, dot( R, V ) ), specularPower );
+	
+	vec3 ambient = Ia * Ka;
+	vec3 diffuse = Id * Kd * lambertTerm;
+	vec3 specular = Is * Ks * specularTerm;
 	
 	FragColour = vec4(diffuse, 1);
 }
