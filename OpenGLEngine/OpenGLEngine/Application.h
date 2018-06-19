@@ -56,6 +56,9 @@ protected:
 	aie::OBJMesh		m_DragonMesh;
 	glm::mat4			m_DragonTransform;
 
+	aie::OBJMesh		m_lucyMesh;
+	glm::mat4			m_lucyTransform;
+
 	aie::OBJMesh		m_spearMesh;
 	glm::mat4			m_spearTransform;
 
@@ -77,6 +80,8 @@ protected:
 	};
 
 	Light				m_light;
+	Light				m_secondLight;
+	Light				m_thirdLight;
 	glm::vec3			m_ambientLight;
 
 private:
